@@ -34,16 +34,16 @@ fn generate_progression(seed: u32, step: u32) -> [u32; PROGRESSION_LENGTH] {
 }
 
 fn create_question(progression: [u32; PROGRESSION_LENGTH], item_to_hide: usize) -> String {
-    let mut question = String::new();
-    for i in 0..progression.iter().len() {
-        let elm = if i == item_to_hide {
-            "..".to_string()
-        } else {
-            progression[i].to_string()
-        };
-
-        question.push_str(elm.as_str());
-        question.push(' ');
-    }
-    question.trim().to_string()
+    progression
+        .iter()
+        .enumerate()
+        .map(|(i, &num)| {
+            if i == item_to_hide {
+                "..".to_string()
+            } else {
+                num.to_string()
+            }
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
 }
