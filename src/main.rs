@@ -2,14 +2,8 @@ use crate::{constants::GameData, engine::run_game};
 
 mod constants;
 mod engine;
+mod games;
 mod utils;
-mod games {
-    pub mod calc;
-    pub mod gcd;
-    pub mod is_even;
-    pub mod prime;
-    pub mod progression;
-}
 
 type GAME = (&'static str, fn() -> GameData);
 const GAMES: [GAME; 5] = [
