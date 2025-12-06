@@ -1,5 +1,3 @@
-use std::cmp;
-
 use crate::{constants::GameData, utils::get_rand};
 
 const RULES: &str = "Find the greatest common divisor of given numbers.";
