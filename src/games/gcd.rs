@@ -16,7 +16,8 @@ pub fn get_data() -> GameData {
 
 fn find_gcd(num1: i32, num2: i32) -> i32 {
     if num2 == 0 {
-        return cmp::max(num1, -num1);
+        num1
+    } else {
+        find_gcd(num2, num1 % num2)
     }
-    find_gcd(num2, num1 % num2)
 }
