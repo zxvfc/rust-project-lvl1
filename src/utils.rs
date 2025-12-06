@@ -7,7 +7,7 @@ pub fn ask(question: &str) -> String {
     let mut input = String::new();
     while input.trim().is_empty() {
         print!("{}", question);
-        io::stdout().flush().expect("Failed to fluhs stdout");
+        io::stdout().flush().expect("Failed to flush stdout");
 
         io::stdin()
             .read_line(&mut input)

@@ -21,7 +21,7 @@ const GAMES: [GAME; 5] = [
 ];
 
 fn main() {
-    println!("Wlcome to the Brain Games!");
+    println!("Welcome to the Brain Games!");
 
     let name = utils::ask("My I ask your name?\n: ");
     let user_name = name.trim();

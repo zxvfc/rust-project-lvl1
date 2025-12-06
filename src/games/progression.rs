@@ -4,7 +4,7 @@ use crate::{
 };
 use std::ops::RangeInclusive;
 
-const RULES: &str = "";
+const RULES: &str = "What number is missing in the progression?";
 const PROGRESSION_LENGTH: usize = 10;
 const PROGRESSION_STEP_RANGE: RangeInclusive<u32> = 2..=5;
 
