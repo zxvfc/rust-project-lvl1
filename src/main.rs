@@ -37,7 +37,7 @@ fn main() {
         };
         let (_, get_game_data) = GAMES[selection - 1];
         let game_data = get_game_data();
-        run_game(user_name, game_data);
+        run_game(user_name, &game_data);
         println!();
     }
 }
