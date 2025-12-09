@@ -1,4 +1,4 @@
-use crate::{constants::GameData, engine::run_game};
+use crate::engine::{GameData, run_game};
 
 mod constants;
 mod engine;
@@ -36,8 +36,8 @@ fn main() {
             }
         };
         let (_, get_game_data) = GAMES[selection - 1];
-        let (game_description, questions_and_answers) = get_game_data();
-        run_game(user_name, game_description, &questions_and_answers);
+        let game_data = get_game_data();
+        run_game(user_name, game_data);
         println!();
     }
 }

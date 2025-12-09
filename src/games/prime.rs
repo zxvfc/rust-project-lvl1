@@ -1,14 +1,22 @@
-use crate::{constants::GameData, utils::get_rand};
+use crate::{
+    engine::{GameData, QuestionAndAnswer},
+    utils::get_rand,
+};
 
 const RULES: &str = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
 
 pub fn get_data() -> GameData {
     let questions_and_answers = std::array::from_fn(|_| {
         let num = get_rand();
-        let answer = if is_prime(num) { "yes" } else { "no" };
-        (num.to_string(), answer.to_string())
+        QuestionAndAnswer {
+            question: num.to_string(),
+            answer: if is_prime(num) { "yes" } else { "no" }.to_string(),
+        }
     });
-    (RULES.to_string(), questions_and_answers)
+    GameData {
+        description: RULES.to_string(),
+        questions_and_answers,
+    }
 }
 
 fn is_prime(num: u32) -> bool {

@@ -1,4 +1,7 @@
-use crate::{constants, utils};
+use crate::{
+    engine::{GameData, QuestionAndAnswer},
+    utils,
+};
 
 type MathOperation = (char, fn(u32, u32) -> i32);
 
@@ -10,7 +13,7 @@ const SUPPORTED_OPERATIONS: [MathOperation; 3] = [
 
 const RULES: &str = "What is the result of the expression?";
 
-pub fn get_data() -> constants::GameData {
+pub fn get_data() -> GameData {
     let questions_and_answers = std::array::from_fn(|_| {
         let operation_index =
             (utils::get_rand_in_range(0..SUPPORTED_OPERATIONS.len() as u32)) as usize;
@@ -19,9 +22,13 @@ pub fn get_data() -> constants::GameData {
         let num1 = utils::get_rand();
         let num2 = utils::get_rand();
 
-        let answer = operation(num1, num2);
-
-        (format!("{num1} {sign} {num2}"), answer.to_string())
+        QuestionAndAnswer {
+            question: format!("{num1} {sign} {num2}"),
+            answer: operation(num1, num2).to_string(),
+        }
     });
-    (RULES.to_string(), questions_and_answers)
+    GameData {
+        description: RULES.to_string(),
+        questions_and_answers,
+    }
 }

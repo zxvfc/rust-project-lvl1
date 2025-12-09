@@ -1,5 +1,5 @@
 use crate::{
-    constants::GameData,
+    engine::{GameData, QuestionAndAnswer},
     utils::{get_rand, get_rand_in_range},
 };
 use std::ops::RangeInclusive;
@@ -15,13 +15,15 @@ pub fn get_data() -> GameData {
         let progression = generate_progression(seed, step);
 
         let hidden_item_index = get_rand_in_range(1..PROGRESSION_LENGTH as u32) as usize;
-        let question = create_question(progression, hidden_item_index);
-        (
-            question,
-            progression[hidden_item_index as usize].to_string(),
-        )
+        QuestionAndAnswer {
+            question: build_question(progression, hidden_item_index),
+            answer: progression[hidden_item_index as usize].to_string(),
+        }
     });
-    (RULES.to_string(), questions_and_answers)
+    GameData {
+        description: RULES.to_string(),
+        questions_and_answers,
+    }
 }
 
 fn generate_progression(seed: u32, step: u32) -> [u32; PROGRESSION_LENGTH] {
@@ -33,7 +35,7 @@ fn generate_progression(seed: u32, step: u32) -> [u32; PROGRESSION_LENGTH] {
     progression
 }
 
-fn create_question(progression: [u32; PROGRESSION_LENGTH], item_to_hide: usize) -> String {
+fn build_question(progression: [u32; PROGRESSION_LENGTH], item_to_hide: usize) -> String {
     progression
         .iter()
         .enumerate()
